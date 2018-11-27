@@ -1,35 +1,57 @@
-#N canvas 521 22 1050 834 10;
-#X obj 153 47 comport 9600;
-#X msg 184 10 devices;
-#X msg 261 10 close;
-#X msg 113 10 open 1, f 7;
-#X obj 125 182 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
-#X obj 125 205 metro 1000;
-#X obj 125 223 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#N canvas 374 23 1066 855 8;
+#X obj 149 52 comport 9600;
+#X msg 141 19 devices;
+#X msg 232 19 close;
+#X msg 189 19 open 1;
+#X obj 174 237 tgl 15 0 empty empty empty 17 7 0 10 -4034 -1 -1 0 1
+;
+#X obj 192 257 metro 1000;
+#X obj 192 276 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 125 259 - 1;
-#X obj 125 278 max 0;
-#X obj 78 90 route 0 1 2;
-#X obj 28 47 hradio 15 1 0 3 empty empty Fake_Arduino 0 -8 0 10 -262144
--1 -1 0;
-#X floatatom 30 124 5 0 0 0 - - -, f 5;
-#X obj 125 241 v charge;
-#X obj 125 296 s charge;
-#X obj 66 170 v charge;
-#X obj 128 327 r charge;
-#X floatatom 128 346 5 0 0 0 - - -, f 5;
-#X obj 66 189 + 10;
-#X obj 66 207 min 100;
-#X obj 66 226 s charge;
-#X obj 100 129 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
--262144 -1 -1 100 256;
-#X obj 161 131 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
--262144 -1 -1 1000 256;
-#X text 179 78 0 = CHARGE_UP 1 = RELEASE_START 2 = RELEASE_STOP;
-#X floatatom 215 176 5 0 0 0 - - -, f 5;
-#X obj 25 8 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
+#X obj 192 313 - 1;
+#X obj 192 331 max 0;
+#X obj 149 81 route 0 1 2;
+#X obj 45 42 hradio 15 1 0 3 empty empty Fake_Arduino 0 -8 0 10 -262144
+-1 -1 2;
+#X floatatom 45 67 5 0 0 0 - - -;
+#X obj 192 295 v charge;
+#X obj 44 201 v charge;
+#X obj 380 360 r charge;
+#X floatatom 380 379 5 0 0 0 - - -;
+#X obj 44 238 + 10;
+#X obj 393 22 loadbang;
+#X obj 393 59 nbx 3 14 -1e+37 1e+37 0 1 charge_step empty charge_step
+0 -8 0 10 -4034 -1 -1 30 256;
+#X obj 393 130 nbx 4 14 -1e+37 1e+37 0 1 discharge_rate empty discharge_rate
+0 -8 0 10 -4034 -1 -1 500 256;
+#X obj 281 195 v discharge_rate;
+#X obj 393 94 nbx 4 14 -1e+37 1e+37 0 1 release_rate empty release_rate
+0 -8 0 10 -4034 -1 -1 1000 256;
+#X obj 61 220 r charge_step;
+#X obj 156 217 loadbang;
+#X obj 534 483 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 199 195 v release_rate;
+#X text 256 62 1 = RELEASE_START;
+#X text 256 48 0 = CHARGE_UP;
+#X text 256 76 2 = RELEASE_STOP;
+#X obj 393 164 nbx 4 14 -1e+37 1e+37 0 1 max_charge empty max_charge
+0 -8 0 10 -4034 -1 -1 269 256;
+#X obj 76 238 r max_charge;
+#X obj 296 174 loadbang;
+#X obj 350 299 r release_start;
+#X obj 443 302 r release_stop;
+#X obj 165 156 bng 15 250 50 0 release_start empty release_start 17
+7 0 10 -249892 -1 -1;
+#X obj 275 156 bng 15 250 50 0 release_stop empty release_stop 17 7
+0 10 -249892 -1 -1;
+#X obj 103 364 nbx 5 14 0 1e+37 0 0 charge empty charge 0 -8 0 10 -249887
+-1 -1 269 256;
+#X obj 445 333 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 374 322 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 44 257 min;
 #X connect 0 0 9 0;
 #X connect 1 0 0 0;
 #X connect 2 0 0 0;
@@ -38,19 +60,29 @@
 #X connect 5 0 6 0;
 #X connect 6 0 12 0;
 #X connect 7 0 8 0;
-#X connect 8 0 13 0;
-#X connect 9 0 14 0;
-#X connect 9 1 20 0;
-#X connect 9 2 21 0;
+#X connect 8 0 36 0;
+#X connect 9 0 13 0;
+#X connect 9 0 35 0;
+#X connect 9 1 34 0;
+#X connect 9 2 35 0;
 #X connect 10 0 11 0;
 #X connect 10 0 9 0;
 #X connect 12 0 7 0;
-#X connect 14 0 17 0;
-#X connect 15 0 16 0;
+#X connect 13 0 16 0;
+#X connect 14 0 15 0;
+#X connect 16 0 39 0;
 #X connect 17 0 18 0;
-#X connect 18 0 19 0;
+#X connect 17 0 19 0;
+#X connect 17 0 21 0;
+#X connect 17 0 29 0;
 #X connect 20 0 5 1;
-#X connect 20 0 23 0;
-#X connect 21 0 5 1;
-#X connect 21 0 23 0;
-#X connect 24 0 10 0;
+#X connect 22 0 16 1;
+#X connect 23 0 4 0;
+#X connect 25 0 5 1;
+#X connect 30 0 39 1;
+#X connect 31 0 20 0;
+#X connect 32 0 38 0;
+#X connect 33 0 37 0;
+#X connect 34 0 25 0;
+#X connect 35 0 20 0;
+#X connect 39 0 36 0;
